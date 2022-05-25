@@ -3,27 +3,29 @@
 |-----------------------|-------|--------------------------|
 |nickname               |string |null: false               |
 |email                  |string |null: false, unique: true |
-|encrypted_password     |string |null: false               |
-|name1                  |string |null: false               |
-|name2                  |string |null: false               |
-|Birthday               |string |null: false               |
+|password               |string |null: false               |
+|first                  |string |null: false               |
+|last                   |string |null: false               |
+|first2                 |string |null: false               |
+|last2                  |string |null: false               |
+|Birthday               |date   |null: false               |
 
 ## association
 has_many :items
 has_many :purchases
 
 #　itemsテーブル
-|column        |  type      |  Options                      |
-|--------------|------------|-------------------------------|
-|Name          |string      |null: false                    |
-|Text          |text        |null: false                    |
-|Category      |string      |null: false                    |
-|Situation     |string      |null: false                    |
-|Delivery      |string      |null: false                    |
-|Area          |string      |null: false                    |
-|Dates         |string      |null: false                    |
-|Price         |string      |null: false                    |
-|user          |references  |null: false, foreign_key: true |
+|column           |  type      |  Options                      |
+|-----------------|------------|-------------------------------|
+|name             |string      |null: false                    |
+|information      |text        |null: false                    |
+|category_id      |integer     |null: false                    |
+|situation_id     |integer     |null: false                    |
+|delivery_id      |integer     |null: false                    |
+|area_id          |integer     |null: false                    |
+|jour_id          |integer     |null: false                    |
+|price            |integer     |null: false                    |
+|user             |references  |null: false, foreign_key: true |
 
 ## association
 belongs_to :user
@@ -41,12 +43,12 @@ has_one :address
 # addressテーブル
 |column             | type        |  Options                      |
 |-------------------|-------------|-------------------------------|
-|post               |string       |null: false                    |
-|prefecture         |string       |null:false                     |
+|post_id            |integer      |null: false                    |
+|area_id            |integer      |null:false                     |
 |municipality       |string       |null:false                     |
 |address            |string       |null:false                     |
 |building           |string       |                               |
-|phone              |string       |null:false                     |
+|phone              |integer      |null:false                     |
 |purchase           |references   |null: false, foreign_key: true |
 
 ## association
