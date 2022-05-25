@@ -1,24 +1,54 @@
-# README
+#　usersテーブル
+|column                 |  type |  Options                 |
+|-----------------------|-------|--------------------------|
+|nickname               |string |null: false               |
+|email                  |string |null: false, unique: true |
+|encrypted_password     |string |null: false               |
+|name1                  |string |null: false               |
+|name2                  |string |null: false               |
+|Birthday               |string |null: false               |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## association
+has_many :items
+has_many :purchases
 
-Things you may want to cover:
+#　itemsテーブル
+|column        |  type      |  Options                      |
+|--------------|------------|-------------------------------|
+|Name          |string      |null: false                    |
+|Text          |text        |null: false                    |
+|Category      |string      |null: false                    |
+|Situation     |string      |null: false                    |
+|Delivery      |string      |null: false                    |
+|Area          |string      |null: false                    |
+|Dates         |string      |null: false                    |
+|Price         |string      |null: false                    |
+|user          |references  |null: false, foreign_key: true |
 
-* Ruby version
+## association
+belongs_to :user
+has_one :purchase
 
-* System dependencies
+# purchaseテーブル
+|user          |references  |null: false, foreign_key: true |
+|item          |references  |null: false, foreign_key: true |
 
-* Configuration
+## association
+belongs_to :user
+belongs_to :item
+has_one :address
 
-* Database creation
+# addressテーブル
+|column             | type        |  Options                      |
+|-------------------|-------------|-------------------------------|
+|post               |string       |null: false                    |
+|prefecture         |string       |null:false                     |
+|municipality       |string       |null:false                     |
+|address            |string       |null:false                     |
+|building           |string       |                               |
+|phone              |string       |null:false                     |
+|purchase           |references   |null: false, foreign_key: true |
 
-* Database initialization
+## association
+belongs_to :purchase
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
