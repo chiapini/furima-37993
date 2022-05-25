@@ -3,12 +3,12 @@
 |-----------------------|-------|--------------------------|
 |nickname               |string |null: false               |
 |email                  |string |null: false, unique: true |
-|password               |string |null: false               |
+|encrypted_password     |string |null: false               |
 |first                  |string |null: false               |
 |last                   |string |null: false               |
 |first2                 |string |null: false               |
 |last2                  |string |null: false               |
-|Birthday               |date   |null: false               |
+|birthday               |date   |null: false               |
 
 ## association
 has_many :items
@@ -43,7 +43,7 @@ has_one :address
 # addressテーブル
 |column             | type        |  Options                      |
 |-------------------|-------------|-------------------------------|
-|post_id            |integer      |null: false                    |
+|post_code          |string       |null: false                    |
 |area_id            |integer      |null:false                     |
 |municipality       |string       |null:false                     |
 |address            |string       |null:false                     |
