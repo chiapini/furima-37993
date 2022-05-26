@@ -95,6 +95,20 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
+      it 'パスワードは半角数値のみでは保存できない' do
+        @user.password = '123456'
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
+      end
+
+      it 'パスワードは全角英数字では保存できない' do
+        @user.password = 'ｃｈｉａｒａ１２'
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
+      end
+
       it 'パスワードと確認用パスワードが一致していないと登録できない' do
         @user.password = '123456'
         @user.password_confirmation = '124567'
@@ -124,6 +138,12 @@ RSpec.describe User, type: :model do
         @user.last2 = '夏菜子'
         @user.valid?
         expect(@user.errors.full_messages).to include('Last2 全角(カタカナ)を使用してください')
+      end
+
+      it 'ニックネームは40文字以下でないと登録できない' do
+        @user.nickname = 'テスト' * 15
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Nickname is too long (maximum is 40 characters)')
       end
     end
   end
