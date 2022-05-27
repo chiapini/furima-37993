@@ -6,10 +6,12 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  class Item < ApplicationRecord
-    extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to :category, :situation, :delivery, :area, :jour
-  end
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :situation
+  belongs_to :delivery
+  belongs_to :area
+  belongs_to :jour
 
   validates :category_id, :situation_id, :delivery_id, :area_id, :jour_id,
             numericality: { other_than: 1, message: "can't be blank" }
