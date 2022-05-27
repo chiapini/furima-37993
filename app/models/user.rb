@@ -15,4 +15,6 @@ class User < ApplicationRecord
   with_options format: { with: /\A[ァ-ヶー]+\z/, message: '全角(カタカナ)を使用してください' } do
     validates :first2, :last2
   end
+
+  has_many :items
 end
