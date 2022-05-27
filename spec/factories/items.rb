@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :item do
-    name { Faker::Commerce.product_name}
+    name { Faker::name[1..40]}
     information { Faker::Lorem.characters(number: 100)}
-    category_id  { Category.all.sample }
-    situation_id  { Situation.all.sample }
-    delivery_id  { Delivery.all.sample }
-    area_id  { Area.all.sample }
-    jour_id  { Jour.all.sample }
+    category_id  { Faker::Number.between(from: 2, to: 11) }
+    situation_id  { Faker::Number.between(from: 2, to: 7) }
+    delivery_id  { Faker::Number.between(from: 2, to: 3) }
+    area_id  { Faker::Number.between(from: 2, to: 48) }
+    jour_id  { Faker::Number.between(from: 2, to: 4) }
     price { Faker::Number.between(from: 300, to: 9999999)}
     association :user
 
