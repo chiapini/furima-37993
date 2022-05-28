@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   validates  :information, length: { maximum: 1000 }
 
   belongs_to :user
+  has_one :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
