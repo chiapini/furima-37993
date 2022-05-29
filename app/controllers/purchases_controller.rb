@@ -1,20 +1,22 @@
 class PurchasesController < ApplicationController
   def index
+    @purchase_address = PurchaseAddress.new(purchase_address_params)
     @item = Item.find(params[:item_id])
   end
 
-  def new
-    @purchase_adress = PurchaseAdress.new (purchase_adress_params)
-    if  @purchase_adress.valid?
-      @purchase_adress.save
-      redirect_to root_path     
-   else
-     render :new
+  def create
+    @purchase_address = PurchaseAddress.new(purchase_address_params)
+    if @purchase_address.valid?
+      @purchase_address.save
+      redirect_to root_path
+    else
+      redirect_to item_purchases_path
+    end
   end
-end
 
   private
-  def purchase_adress_params
-    params.require(:PurchaseAdress).permit(:post_code,:area_id,:building,:municipality,:adress,:phone).merge
+
+  def purchase_address_params
+    params.permit(:post_code, :area_id, :building, :municipality, :address, :phone).merge(token: params[:token])
   end
 end

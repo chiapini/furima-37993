@@ -8,10 +8,10 @@ submit.addEventListener("click",(e) =>{
   const formData = new FormData(form);
 
   const card ={
-    number: formData.get("card-number"),
-    exp_month: formData.get("card-exp-month"),
-    exp_year: formData.get("card-exp-year"),
-    cvc: formData.get("card-cvc"),
+    number: formData.get("purchase_address[number]"),
+    exp_month: formData.get("purchase_address[exp_month]"),
+    exp_year: formData.get("purchase_adrdess[exp_year]"),
+    cvc: formData.get("purchase_address[cvc]"),
   }
 
   Payjp.createToken (card, (status, response) => {
