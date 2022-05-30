@@ -1,13 +1,16 @@
 class PurchasesController < ApplicationController
+  before_action :set_item,only:[:index,:create]
+  before_action :authenticate_user!, only: [:index]
+  before_action :move_to_index, only:[:index]
+  before_action :redirect_to_root_path, only:[:index]
+
+
   def index
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new(purchase_address_params)
-    # binding.pry
     if @purchase_address.valid?
       pay_item
       @purchase_address.save
@@ -17,14 +20,31 @@ class PurchasesController < ApplicationController
     end
   end
 
+
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    if current_user.id == @item.user_id
+    redirect_to root_path
+    end
+  end
+
+  def redirect_to_root_path
+    if @item.purchase.present? 
+      redirect_to root_path
+    end
+  end
 
   def purchase_address_params
     params.require(:purchase_address).permit(:post_code, :area_id, :building, :municipality, :address, :phone).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_2c8f99642adb8bfd94a7fdde"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
     amount: @item.price,
     card: purchase_address_params[:token],
