@@ -31,7 +31,7 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Post code can't be blank")
       end
       it '都道府県が空欄だと購入出来ない' do
-        @purchase_address.area_id = ''
+        @purchase_address.area_id = '1'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Area can't be blank")
       end

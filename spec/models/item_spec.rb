@@ -32,31 +32,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーが空だったら出品できない' do
-        @item.category_id = ''
+        @item.category_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態が空だったら出品できない' do
-        @item.situation_id = ''
+        @item.situation_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Situation can't be blank")
       end
 
       it '配送料の負担が空だったら出品できない' do
-        @item.delivery_id = ''
+        @item.delivery_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery can't be blank")
       end
 
       it '発送元の地域が空だったら出品できない' do
-        @item.area_id = ''
+        @item.area_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Area can't be blank")
       end
 
       it '発送までの日数が空だったら出品できない' do
-        @item.jour_id = ''
+        @item.jour_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Jour can't be blank")
       end
