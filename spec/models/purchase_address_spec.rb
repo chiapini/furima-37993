@@ -23,67 +23,67 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'Tokenが空欄だと購入出来ない' do
         @purchase_address.token = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('クレジットカード情報を入力してください')
       end
       it '郵便番号が空欄だと購入出来ない' do
         @purchase_address.post_code = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Post code can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('郵便番号を入力してください')
       end
       it '都道府県が空欄だと購入出来ない' do
         @purchase_address.area_id = '1'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Area can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('都道府県を入力してください')
       end
       it '市区町村が空欄だと購入出来ない' do
         @purchase_address.municipality = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Municipality can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('市区町村を入力してください')
       end
       it '番地が空欄だと購入出来ない' do
         @purchase_address.address = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Address can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('番地を入力してください')
       end
       it '電話番号が空欄だと購入出来ない' do
         @purchase_address.phone = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('電話番号を入力してください')
       end
       it '郵便番号は「3桁ハイフン4桁」での入力でないと購入できない' do
         @purchase_address.post_code = '1500068'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Post code は、「3桁ハイフン4桁」の半角文字列で設定してください')
+        expect(@purchase_address.errors.full_messages).to include('郵便番号は、「3桁ハイフン4桁」の半角文字列で設定してください')
       end
       it '郵便番号は半角文字列での入力でないと購入できない' do
         @purchase_address.post_code = '１５０−００６８'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Post code は、「3桁ハイフン4桁」の半角文字列で設定してください')
+        expect(@purchase_address.errors.full_messages).to include('郵便番号は、「3桁ハイフン4桁」の半角文字列で設定してください')
       end
       it '電話番号は10桁以上でないと購入できない' do
         @purchase_address.phone = '10905684'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone は、10桁以上11桁以内の半角数値で設定してください')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は、10桁以上11桁以内の半角数値で設定してください')
       end
       it '電話番号は11桁以内でないと購入できない' do
         @purchase_address.phone = '190568421735'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone は、10桁以上11桁以内の半角数値で設定してください')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は、10桁以上11桁以内の半角数値で設定してください')
       end
       it '電話番号は半角数値での入力でないと購入できない' do
         @purchase_address.phone = '１９０５６８４３２９１'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone は、10桁以上11桁以内の半角数値で設定してください')
+        expect(@purchase_address.errors.full_messages).to include('電話番号は、10桁以上11桁以内の半角数値で設定してください')
       end
       it 'ユーザーが紐づいていないと購入できない' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('Userを入力してください')
       end
       it '商品が紐づいていないと購入できない' do
         @purchase_address.item_id = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+        expect(@purchase_address.errors.full_messages).to include('Itemを入力してください')
       end
     end
   end
